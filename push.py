@@ -25,12 +25,12 @@ def get_basic_info():
     ratio2 = coin_info[coin_info['trade_price'] < 100].shape[0] / coin_info.shape[0] * 100
     txt += f'under 1000: {round(ratio1, 1)}%, under 100: {round(ratio2, 1)}% \n'
 
-    with open('ratio_log.pkl', 'rb') as f:
-        df = pickle.load(f)
-    df.append({'trade_timestamp': coin_info.iloc[0]['trade_timestamp'], 'under1000': ratio1, 'under100': ratio2})
+#     with open('ratio_log.pkl', 'rb') as f:
+#         df = pickle.load(f)
+#     df.append({'trade_timestamp': coin_info.iloc[0]['trade_timestamp'], 'under1000': ratio1, 'under100': ratio2})
 
-    with open('ratio_log.pkl', 'wb') as f:
-        pickle.dump(df, f)
+#     with open('ratio_log.pkl', 'wb') as f:
+#         pickle.dump(df, f)
 
     return coin_info, coin_list, txt
 
