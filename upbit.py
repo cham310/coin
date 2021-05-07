@@ -6,7 +6,7 @@ import jwt
 import logging
 from datetime import datetime
 from urllib.parse import urlencode
-
+import pandas as pd
 
 class Upbitpy():
     """
@@ -38,7 +38,12 @@ class Upbitpy():
         :return: json array
         '''
         URL = 'https://api.upbit.com/v1/accounts'
-        return self._get(URL, self._get_headers())
+        a = pd.DataFrame(data=self._get(URL, self._get_headers()))
+        target = list(a[a['currency']!= 'KRW']['currency'])
+        target = ["KRW-"+x for x in target]
+        b = pd.DataFrame(data=self.get_ticker(target))[['market', 'trade_price']]
+        b['market'] = [x.split('-')[1] for x in b['market']]
+        return a.merge(b, how='left', left_on='currency', right_on='market')[['currency', 'balance', 'avg_buy_price', 'trade_price']]
 
     def get_chance(self, market):
         '''

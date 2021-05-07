@@ -1,3 +1,4 @@
 *.pkl
+key.txt
 __pycache__
 .idea
