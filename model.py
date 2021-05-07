@@ -62,17 +62,17 @@ class Screening:
             ratio2 = coin_info[coin_info['trade_price'] < 100].shape[0] / coin_info.shape[0] * 100
             txt += f'under 1000: {round(ratio1, 1)}%, under 100: {round(ratio2, 1)}% \n'
 
-            if not os.path.isdir('ratio_log.pkl'):
-                df = [{'trade_timestamp': coin_info.iloc[0]['trade_timestamp'], 'under1000': ratio1, 'under100': ratio2}]
-                with open('ratio_log.pkl', 'wb') as f:
-                    pickle.dump(df, f)
-
-            else:
-                with open('ratio_log.pkl', 'rb') as f:
-                    df = pickle.load(f)
-                df.append({'trade_timestamp': coin_info.iloc[0]['trade_timestamp'], 'under1000': ratio1, 'under100': ratio2})
-                with open('ratio_log.pkl', 'wb') as f:
-                    pickle.dump(df, f)
+            # if not os.path.isdir('ratio_log.pkl'):
+            #     df = [{'trade_timestamp': coin_info.iloc[0]['trade_timestamp'], 'under1000': ratio1, 'under100': ratio2}]
+            #     with open('ratio_log.pkl', 'wb') as f:
+            #         pickle.dump(df, f)
+            #
+            # else:
+            #     with open('ratio_log.pkl', 'rb') as f:
+            #         df = pickle.load(f)
+            #     df.append({'trade_timestamp': coin_info.iloc[0]['trade_timestamp'], 'under1000': ratio1, 'under100': ratio2})
+            #     with open('ratio_log.pkl', 'wb') as f:
+            #         pickle.dump(df, f)
 
         return coin_list, coin_info ### list는 이름 등 기본 정보 info는 수치 데이터도 있음
 
